@@ -1,0 +1,13 @@
+node_modules
+dist
+dist-ssr
+*.local
+.DS_Store
+package-lock.json
+
+# Environment files (keep .env.example, ignore actual .env)
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local

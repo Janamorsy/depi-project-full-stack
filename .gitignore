@@ -1,0 +1,33 @@
+# =============================
+# BACKEND (ASP.NET Core)
+# =============================
+Backend/bin/
+Backend/obj/
+Backend/appsettings.json
+Backend/appsettings.Development.json
+Backend/appsettings.*.json
+!Backend/appsettings.Example.json
+Backend/*.env
+Backend/wwwroot/uploads/*
+!Backend/wwwroot/uploads/.gitkeep
+git-filter-repo/   # ignore folder used for filtering, do NOT commit
+
+# =============================
+# FRONTEND (React / Vite / Vue)
+# =============================
+frontend/node_modules/
+frontend/dist/
+frontend/build/
+frontend/.env
+frontend/.env.local
+frontend/.env.*.local
+
+# =============================
+# COMMON / MISC 
+# =============================
+*.log
+*.tmp
+*.DS_Store
+# Ignore Visual Studio temporary files
+.vs/
+.github/instructions/
