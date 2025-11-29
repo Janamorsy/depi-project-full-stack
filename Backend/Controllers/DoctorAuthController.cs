@@ -34,7 +34,7 @@ public class DoctorAuthController : ControllerBase
         }
         catch (Exception ex)
         {
-            return StatusCode(500, new { message = $"Server Crash: {ex.Message} | Source: {ex.StackTrace}" });
+            return BadRequest(new { message = ex.Message });
         }
     }
 

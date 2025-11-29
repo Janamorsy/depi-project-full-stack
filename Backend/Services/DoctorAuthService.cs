@@ -76,20 +76,17 @@ public class DoctorAuthService : IDoctorAuthService
 
         if (front_id_type != "front_egy_id")
         {
-            Console.WriteLine("Rejected: Please upload a clear image of the front of your Egyptian ID.");
-            return null;
+            throw new Exception("Rejected: Please upload a clear image of the front of your Egyptian ID.");
         }
 
         if (back_id_type != "back_egy_id")
         {
-            Console.WriteLine("Rejected: Please upload a clear image of the back of your Egyptian ID.");
-            return null;
+            throw new Exception("Rejected: Please upload a clear image of the back of your Egyptian ID.");
         }
         var job_field = JobDetector(backPhysicalPath, back_id_type);
         if (!job_field.Contains("طبيب") && !job_field.Contains("طبيبة"))
         {
-            Console.WriteLine("Rejected: ID Profession is not a medical profession");
-            return null;
+            throw new Exception("Rejected: ID Profession is not a medical profession");
         }
 
         var result = await _userManager.CreateAsync(doctor, registerDto.Password);
@@ -180,7 +177,7 @@ public class DoctorAuthService : IDoctorAuthService
             return error;
         }
         using var image = SKImage.FromEncodedData(imagePath);
-        string modelPath = Path.Combine(AppContext.BaseDirectory, "id_detection.onnx");
+        string modelPath = Path.Combine(AppContext.BaseDirectory, "AI_Resources", "id_detection.onnx");
         using var classifier = new Yolo(new YoloOptions
         {
             OnnxModel = modelPath
@@ -208,7 +205,7 @@ public class DoctorAuthService : IDoctorAuthService
             return error;
         }
         using var image = SKImage.FromEncodedData(imagePath);
-        string modelPath = Path.Combine(AppContext.BaseDirectory, "job_detection.onnx");
+        string modelPath = Path.Combine(AppContext.BaseDirectory, "AI_Resources", "job_detection.onnx");
         using var jobDetector = new Yolo(new YoloOptions
         {
             OnnxModel = modelPath
@@ -248,7 +245,7 @@ public class DoctorAuthService : IDoctorAuthService
         public void Initialize()
         {
             string baseDir = AppContext.BaseDirectory;
-            string modelsDir = Path.Combine(baseDir, "models");
+            string modelsDir = Path.Combine(baseDir, "AI_Resources", "models");
 
             string detPath = Path.Combine(modelsDir, "ch_PP-OCRv3_det_infer");
             string clsPath = Path.Combine(modelsDir, "ch_ppocr_mobile_v2.0_cls_infer");
