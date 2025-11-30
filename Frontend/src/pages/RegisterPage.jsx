@@ -54,7 +54,7 @@ const RegisterPage = () => {
       authLogin(userData);
       navigate('/dashboard');
     } catch (err) {
-      setError(err.response?.data?.message || 'Registration failed');
+      setError(err.response?.data?.message || 'Registration failed: double check your information');
     } finally {
       setLoading(false);
     }

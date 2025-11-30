@@ -23,7 +23,7 @@ const LoginPage = () => {
       authLogin(userData);
       navigate('/dashboard');
     } catch (err) {
-      setError(err.response?.data?.message || 'Login failed');
+      setError(err.response?.data?.message || 'Incorrect Email or Password');
     } finally {
       setLoading(false);
     }
